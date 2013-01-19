@@ -1,0 +1,39 @@
+// Place all the styles related to the Articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
+.brand {
+  font-size: 1.7em;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+#body {
+  padding-top:60px;
+  padding-bottom:0px;
+  background-color: #4B7399;
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 14px; 
+}
+
+.btn-group{
+  clear:both;
+  margin: auto;
+}
+
+.btn-group-wrap {
+    text-align: center;
+}
+
+#main-container {
+  width: 75%;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding: 20px 40px;
+  border: solid 1px black;
+  margin-top: 20px;
+  min-height: 600px;
+}
