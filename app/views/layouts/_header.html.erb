@@ -1,28 +1,34 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-      <div class="container">
+      <div id = "header-container" class="container">
         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="#">My Wiki</a>
+        <div > 
+        	<h1 id="brand">My Wiki</h1>
+        	<% if signed_in? %>
+
+		        <span id="user-name"><h5>Welcome, <%= current_user.username %>!</h5></span></li>
+
+   		  	<% end %> 
+        </div>
         <div class="nav-collapse">
           <ul class="nav">
             <li><%= link_to "Home", root_path %></li>
          
             <% if signed_in? %>
-		        <li> <%= link_to "Sign out", signout_path, :method=> "delete" %></li>
-		        <li><%= link_to current_user.name, current_user %></li>
+		        <li> <%= link_to "Sign out", destroy_user_session_path, :method=> "delete" %></li>
 			<% else %>
-		    	<li><%= link_to "Sign in", signin_path %></li>
+		    	<li><%= link_to "Sign in", new_user_session_path %></li><li><%= link_to "Sign up", new_user_registration_path %></li>
    		  	<% end %>
 
           </ul>
         </div>
         <form class="navbar-search pull-right">
 		  <input type="text" class="search-query" placeholder="Search">
-
+		  <button type="submit" id="search-btn" class="btn btn-mini btn-info">Find Article</button>
 		</form>
       </div>
     </div>

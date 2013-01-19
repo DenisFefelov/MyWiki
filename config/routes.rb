@@ -6,9 +6,7 @@ MyWiki::Application.routes.draw do
 
   root :to => 'articles#index'
   
-  match '/signup',  to: 'users#sign_up'
-  match '/signin',  to: 'users#sign_in'
-  match '/signout', to: 'users#sign_out', via: :delete
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

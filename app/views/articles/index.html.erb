@@ -1,25 +1,37 @@
 <h1>Listing articles</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Content</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @articles.each do |article| %>
-  <tr>
-    <td><%= article.title %></td>
-    <td><%= article.content %></td>
-    <td><%= link_to 'Show', article %></td>
-    <td><%= link_to 'Edit', edit_article_path(article) %></td>
-    <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% if !@articles || @articles.empty? %>
+      <div class="empty">
+        <%= image_tag "arrow.png" %>
+      </div>
+<% else %>
+	<table class="table table-striped">
+	  <tr>
+	  	<th></th>
+	    <th>Title</th>
+	    
+	    <th>Last modification</th>
+	  </tr>
+	
+	<% @articles.each do |article| %>
+	  <tr>
+	  	<td><%= link_to 'Edit', edit_article_path(article) %></td>
+	    <td><%= link_to h(article.title), article%></td>
+	    <td class="right"> 
+	      	<% if article.last_edited_at  %> 	
+			  	<%= distance_of_time_in_words_to_now article.last_edited_at %>  ago 
+			  <%end%>
+			  <% if article.last_edited_by %> 
+			  	by  <%= link_to article.user.username, article.user %>
+			  <%end%>
+	      </td>
+	
+	    
+	    <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	  </tr>
+	<% end %>
+	</table>
 <% end %>
-</table>
 
 <br />
 
-<%= link_to 'New Article', new_article_path %>
+<%= link_to 'New Article', new_article_path, :class => 'btn btn-primary' %>

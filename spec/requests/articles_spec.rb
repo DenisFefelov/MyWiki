@@ -1,11 +1,46 @@
 require 'spec_helper'
 
 describe "Articles" do
-  describe "GET /articles" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get articles_path
-      response.status.should be(200)
+  subject{page}
+  
+  describe "Index" do
+    before {visit root_path}
+    
+    it "should have New button" do
+       should have_link('New Article', {:href => new_article_path})
+    end
+    
+    describe "when not logged in" do
+      before { click_link "New Article" }
+      it { should have_selector('h2',    text: 'Sign in') } 
+    end
+    
+    describe "when logged in" do
+      before do 
+        @user = FactoryGirl.create(:user)
+        login_as @user, scope: :user
+        visit root_path
+        click_link "New Article" 
+      end  
+      it { should have_selector('h1',    text: 'Create new article') } 
+      it { should have_button('Create')}
+      
+      describe "with valid information" do
+        before do
+          fill_in "Title",         with: "New Title"
+          fill_in "Content",        with: "user@example.com"
+        end
+  
+        it "should create a article" do
+          expect do
+            click_button "Create"
+          end.to change(Article, :count).by(1)
+        end
+        
+  
+        
+      end
+    
     end
   end
 end

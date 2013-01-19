@@ -3,22 +3,32 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap";
 
-.brand {
-  font-size: 1.7em;
+#brand {
+  font-size: 1.8em;
   text-transform: uppercase;
   letter-spacing: -1px;
   font-weight: bold;
   line-height: 1;
+  float: left;
+  margin: 10px 40px;
+}
+
+form label{
+  display:inline;
 }
 
 #body {
-  padding-top:60px;
+
+  padding-top:40px;
   padding-bottom:0px;
   background-color: #4B7399;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px; 
 }
 
+#search-btn{
+  margin-top:0px;
+}
 .btn-group{
   clear:both;
   margin: auto;
@@ -29,11 +39,28 @@
 }
 
 #main-container {
-  width: 75%;
+  width: 85%;
   margin: 0 auto;
   background-color: #FFF;
   padding: 20px 40px;
   border: solid 1px black;
   margin-top: 20px;
   min-height: 600px;
+  min-width:1000px;
+}
+
+#header-container {
+  width: 85%;
+  height: 45px;
+  min-width:1000px;
+}
+
+#user-name {
+  margin-left: 50px;
+  margin-left: 50px;
+  float:right;
+}
+
+#article_title, #article_content{
+  width:100%;
 }

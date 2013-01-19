@@ -11,15 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="article-field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
-  <div class="field">
+  <div class="article-field">
     <%= f.label :content %><br />
     <%= f.text_area :content %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit (@article.new_record? ? "Create" : "Update") %>
   </div>
 <% end %>
