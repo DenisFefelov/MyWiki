@@ -1,8 +1,15 @@
 // Place all the styles related to the histories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.blue-link{
+.blue-link, p a{
   color:blue;
+  &:visited {
+    color: purple;
+  }
+  &:hover {
+    color: blue;
+
+  }
 }
 
 

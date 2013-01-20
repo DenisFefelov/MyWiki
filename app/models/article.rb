@@ -19,4 +19,6 @@ class Article < ActiveRecord::Base
   def normalize_friendly_id(string)    
     super.gsub("-", "+")  
   end
+  
+  
 end
