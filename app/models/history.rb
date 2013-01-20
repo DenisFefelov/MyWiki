@@ -3,4 +3,6 @@ class History < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :article
+  
+  default_scope order: 'histories.created_at DESC'
 end
