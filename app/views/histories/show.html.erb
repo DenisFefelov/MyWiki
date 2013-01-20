@@ -1,16 +1,5 @@
 <h2><%= @history.article.title%></h2>
 <h5>changes on <%= @history.created_at.to_s(:long)%></h5>
-<table class="table table-striped">
-  <tr>
-  	<th>Old content</th>
-    <th>Modified content</th>
-  </tr>
- 
-	 <tr>
-	  	<td><%= @diff%></td>
-	    <td class="right">@diff</td>
-	 </tr>
- 
-</table>
+<%= raw @diff%></td>
 <br>
 <%= link_to 'Back', article_histories_path(@history.article), :class => 'btn btn-info btn-mini' %> |
