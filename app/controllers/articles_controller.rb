@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
+  before_filter :get_old_content, :only => [:create, :update]
+
   
   # GET /articles
   # GET /articles.json
@@ -16,7 +18,9 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @article = Article.find(params[:id])
-
+    if request.path != article_path(@article)
+      redirect_to @article, status: :moved_permanently
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @article }
@@ -42,10 +46,10 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    @article = Article.new(params[:article])
-
-    respond_to do |format|
+   @article = current_user.last_edited_articles.build(params[:article])
+   respond_to do |format|
       if @article.save
+        @article.save_history(current_user, @old_content)
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render json: @article, status: :created, location: @article }
       else
@@ -58,10 +62,9 @@ class ArticlesController < ApplicationController
   # PUT /articles/1
   # PUT /articles/1.json
   def update
-    @article = Article.find(params[:id])
-
     respond_to do |format|
       if @article.update_attributes(params[:article])
+        @article.save_history(current_user, @old_content)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,4 +85,17 @@ class ArticlesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+  
+      def get_old_content
+        if request.put? && params[:id]
+          @article = Article.find(params[:id])
+          @old_content = @article.content
+        else
+          @old_content = ""  
+        end
+        
+      end
+
 end

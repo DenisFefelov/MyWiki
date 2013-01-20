@@ -12,23 +12,8 @@
 	    <th>Last modification</th>
 	  </tr>
 	
-	<% @articles.each do |article| %>
-	  <tr>
-	  	<td><%= link_to 'Edit', edit_article_path(article) %></td>
-	    <td><%= link_to h(article.title), article%></td>
-	    <td class="right"> 
-	      	<% if article.last_edited_at  %> 	
-			  	<%= distance_of_time_in_words_to_now article.last_edited_at %>  ago 
-			  <%end%>
-			  <% if article.last_edited_by %> 
-			  	by  <%= link_to article.user.username, article.user %>
-			  <%end%>
-	      </td>
-	
-	    
-	    <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-	  </tr>
-	<% end %>
+	  
+	<%= render @articles %>
 	</table>
 <% end %>
 

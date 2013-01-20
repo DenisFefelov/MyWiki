@@ -1,0 +1,15 @@
+<tr>
+  	<td><%= link_to 'Edit', edit_article_path(article) %></td>
+    <td><%= link_to h(article.title), article%></td>
+    <td class="right"> 
+      	 	
+	  	<%= distance_of_time_in_words_to_now article.updated_at %>  ago 
+
+		<% if article.last_editor %> 
+		  	by  <%= article.last_editor.username %>
+		  <%end%>
+      </td>
+
+    
+    <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

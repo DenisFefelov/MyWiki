@@ -1,0 +1,16 @@
+<h2><%= @article.title%></h2>
+<h5>history of changes</h5>
+<table class="table table-striped">
+  <tr>
+  	<th>Date</th>
+    <th>Modified by</th>
+  </tr>
+  <% @histories.each do |history| %>
+	 <tr>
+	  	<td><%= link_to history.created_at.to_s(:long), article_history_path(@article, history), :class => 'blue-link' %></td>
+	    <td class="right"><%= history.user.username %></td>
+	 </tr>
+  <%end%>
+</table>
+<br>
+<%= link_to 'Back', @article, :class => 'btn btn-mini' %> |

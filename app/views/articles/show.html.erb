@@ -1,15 +1,22 @@
-<p id="notice"><%= notice %></p>
 
 <p>
-  <b>Title:</b>
-  <%= @article.title %>
+ 
+  <h2><%= @article.title %></h2>
+  <h5>
+  	<% if @article.last_editor %> 
+		  	last edited by  <%= @article.last_editor.username %>
+    <%end%> 
+  	
+  	</h5>
 </p>
-
 <p>
-  <b>Content:</b>
-  <%= @article.content %>
+	<%= link_to 'History', article_histories_path(@article), :class => 'btn btn-info btn-mini' %>
+</p>	
+<p>
+  
+  <%= markdown(@article.content) %>
 </p>
 
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+<%= link_to 'Edit', edit_article_path(@article), :class => 'btn btn-mini' %> |
+<%= link_to 'Back', root_path, :class => 'btn btn-mini' %>

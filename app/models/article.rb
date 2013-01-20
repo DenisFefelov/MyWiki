@@ -1,17 +1,22 @@
 class Article < ActiveRecord::Base
-  attr_accessible :content, :title, :last_editor_id, :last_edited_at
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history], :sequence_separator=> '+'
   
-  validates :title,  :presence => true, :length => { :maximum => 20 }
+  attr_accessible :content, :title, :last_editor_id, :slug
+  
+  validates :title,  :presence => true, :length => { :maximum => 50 }
   validates :content,  :presence => true
   
-  def do_save(user)
-    last_editor_id = user_id
-    last_edited_at = Time.now
-    save_history(user)
-    save
+  belongs_to :last_editor, class_name:  "User", foreign_key: "last_editor_id"
+  
+  has_many :histories
+  
+    
+  def save_history(user, old_content)
+    histories.create!(:user_id => user.id, :old_content=> old_content, :new_content=>content)
   end
   
-  def save_history(user)
-    
+  def normalize_friendly_id(string)    
+    super.gsub("-", "+")  
   end
 end

@@ -16,9 +16,9 @@ class User < ActiveRecord::Base
                         #:format=>{:with => VALID_NAME_REGEX, :message => "should only contain letters, numbers, underscore, hyphen"} 
   
  
-   #validates_format_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
-  #validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
+   has_many :last_edited_articles, foreign_key: "last_editor_id",
+                  class_name:  "Article"
 
 
-
+  has_many :histories
 end

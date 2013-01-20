@@ -1,5 +1,8 @@
 MyWiki::Application.routes.draw do
-  resources :articles
+  resources :articles, :path => "wiki" do
+    resources :histories, only: [:show, :index]
+  end
+ 
 
 
   devise_for :users

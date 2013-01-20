@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130119101054) do
+ActiveRecord::Schema.define(:version => 20130120143858) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -20,6 +20,30 @@ ActiveRecord::Schema.define(:version => 20130119101054) do
     t.datetime "updated_at",     :null => false
     t.integer  "last_editor_id"
     t.datetime "last_edited_at"
+    t.string   "slug"
+  end
+
+  add_index "articles", ["slug"], :name => "index_articles_on_slug"
+  add_index "articles", ["title"], :name => "index_articles_on_title"
+
+  create_table "friendly_id_slugs", :force => true do |t|
+    t.string   "slug",                         :null => false
+    t.integer  "sluggable_id",                 :null => false
+    t.string   "sluggable_type", :limit => 40
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], :name => "index_friendly_id_slugs_on_slug_and_sluggable_type", :unique => true
+  add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "histories", :force => true do |t|
+    t.integer  "article_id"
+    t.integer  "user_id"
+    t.text     "new_content"
+    t.text     "old_content"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -11,6 +11,5 @@ FactoryGirl.define do
   factory :article do
     title "My article"
     content "Lorem ipsum"
-    user
   end
 end

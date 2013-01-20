@@ -35,16 +35,31 @@ describe "Articles" do
       
       describe "with valid information" do
         before do
-          fill_in "Title",         with: "New Title"
-          fill_in "Content",        with: "user@example.com"
+          @article = FactoryGirl.create(:article)
+          fill_in "Title",         with: @article.title
+          fill_in "Content",        with: @article.content
         end
   
-        it "should create a article" do
+        it "should create an article" do
           expect do
             click_button "Create"
           end.to change(Article, :count).by(1)
         end
         
+        
+        describe "root path" do
+          before do
+            visit root_path
+          end
+    
+          it "should contain the article" do
+            should have_link(@article.title, {:href => article_path(@article)})
+            #should have_content("by #{@user.username}")
+          end
+          
+    
+          
+        end
   
         
       end
