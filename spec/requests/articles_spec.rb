@@ -25,6 +25,14 @@ describe "Articles" do
       it { should have_selector('h1',    text: 'Create new article') } 
       it { should have_button('Create')}
       
+      describe "with invalid information" do
+        it "should not create a article" do
+          expect do
+            click_button "Create"
+          end.not_to change(Article, :count)
+        end
+      end
+      
       describe "with valid information" do
         before do
           fill_in "Title",         with: "New Title"
