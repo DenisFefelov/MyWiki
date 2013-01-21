@@ -21,7 +21,7 @@ module ArticlesHelper
       
       txt = marked_text[/\[\[([^\]]*)\]\]/,1]
       puts txt
-      "[#{txt}](/#{txt.parameterize.gsub('-', '+')})"
+      "[#{txt}](/wiki/#{txt.parameterize.gsub('-', '+')})"
       
     end
     
