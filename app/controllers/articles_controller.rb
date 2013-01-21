@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @article = Article.find(params[:id])
+    @article = Article.find(params[:id]) || not_found
     if request.path != article_path(@article)
       redirect_to @article, status: :moved_permanently
     end
@@ -96,6 +96,10 @@ class ArticlesController < ApplicationController
           @old_content = ""  
         end
         
+      end
+      
+      def not_found
+        raise ActionController::RoutingError.new('Article not Found')
       end
 
 end

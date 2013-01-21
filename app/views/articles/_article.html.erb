@@ -1,5 +1,7 @@
 <tr>
-  	<td><%= link_to 'Edit', edit_article_path(article) %></td>
+  	<td>
+  		<%= link_to image_tag("edit-icon.png", :class => 'edit-icon'),	edit_article_path(article) %>
+  	</td>
     <td><%= link_to h(article.title), article%></td>
     <td class="right"> 
       	 	

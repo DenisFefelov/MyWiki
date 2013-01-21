@@ -12,9 +12,9 @@ class HistoriesController < ApplicationController
     @history = History.find(params[:id])
     @diff = Diffy::Diff.new( @history.old_content || "", 
                              @history.new_content || "", 
-                             diff: ['-u', '-d'], 
+                             diff: ['-u', 3], 
                              include_diff_info: true, 
-                             include_plus_and_minus_in_html: true).to_s(:html_simple)
+                             include_plus_and_minus_in_html: true).to_s(:text)
 
     respond_to do |format|
       format.html
