@@ -4,6 +4,8 @@ class Article < ActiveRecord::Base
   
   attr_accessible :content, :title, :last_editor_id, :slug
   
+  default_scope order: 'articles.updated_at DESC'
+  
   validates :title,  :presence => true, :length => { :maximum => 50 }
   validates :content,  :presence => true
   

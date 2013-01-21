@@ -1,5 +1,6 @@
 module ArticlesHelper
   def markdown(text)
+     renderer = MyWikiRenderer.new(hard_wrap: true, filter_html: true)
     options = {
         autolink: true,
         no_intra_emphasis: true,
@@ -11,7 +12,7 @@ module ArticlesHelper
         hard_wrap: true,
         filter_html: true
     }
-    Redcarpet::Markdown.new(MyWikiRenderer, options).render(text).html_safe
+    Redcarpet::Markdown.new(renderer, options).render(text).html_safe
   end
   
   
